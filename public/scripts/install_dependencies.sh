@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
-
-echo "install dependence"
+#!/bin/bash
 yum install -y httpd
+

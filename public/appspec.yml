@@ -4,18 +4,26 @@ files:
   - source: /
     destination: /var/www/html/
 hooks:
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+      runas: root
+
+  AfterInstall:
+    - location: scripts/after_install.sh
+      timeout: 300
+      runas: root
+
   BeforeInstall:
     - location: scripts/install_dependencies.sh
       timeout: 300
       runas: root
-  ApplicationStop:
-    - location: scripts/appstop.sh
-      timeout: 6000
-      runas: ubuntu
-  BeforeInstall:
-    - location: scripts/beforeinstall.sh
+
+  ApplicationStart:
+    - location: scripts/start_server.sh
       timeout: 300
-      runas: ubuntu
-  AfterInstall:
-    - location: scripts/afterinstall.sh
-      timeout: 6000
+      runas: root
+
+  ValidateService:
+    - location: scripts/validate_service.sh
+      timeout: 300
